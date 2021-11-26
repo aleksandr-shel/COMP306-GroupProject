@@ -12,11 +12,18 @@ namespace Group33_COMP306_GroupProject.Mappings
     {
         public MappingProfile()
         {
-            //IQueryable<Ingredient> ingredients = null;
-            CreateMap<Recipe, RecipeDto>().ForMember(d => d.Ingredients, opt => opt.MapFrom(s => s.Ingredients));
-            //.ForMember(x => x.Ingredients, opt =>
-            //        opt.MapFrom(src => src.Ingredients.Join(ingredients, a => a.RecipeId, ).ToList()));
+            CreateMap<Recipe, RecipeDto>();
+                //.ForMember(dto => dto.Ingredients, opt => opt.MapFrom(model => model.Ingredients))
+                //.AfterMap((model, dto) =>
+                //{
+                //    foreach (var dtoIngr in dto.Ingredients)
+                //    {
+                //        dtoIngr.Recipe = dto;
+                //    }
+                //});
             CreateMap<Ingredient, IngredientDto>();
+
+
         }
     }
 }

@@ -19,6 +19,6 @@ namespace RecipeLibrary.Models
         public string ImageIrl { get; set; }
         public string AuthorId { get; set; }
 
-        public virtual ICollection<Ingredient> Ingredients { get; set; }
+        public ICollection<Ingredient> Ingredients { get; set; }
     }
 }

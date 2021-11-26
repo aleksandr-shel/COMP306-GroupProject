@@ -53,7 +53,7 @@ namespace RecipeLibrary.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Recipe_RecipeId");
 
-                entity.HasOne<Recipe>(i => i.Recipe).WithMany(r => r.Ingredients);
+                //entity.HasOne<Recipe>(i => i.Recipe).WithMany(r => r.Ingredients);
             });
 
             modelBuilder.Entity<Recipe>(entity =>
@@ -81,8 +81,10 @@ namespace RecipeLibrary.Models
                 entity.Property(e => e.RecipeType)
                     .HasMaxLength(30)
                     .IsUnicode(false);
+                
+                //entity.HasMany<Ingredient>(r => r.Ingredients).WithOne(i => i.Recipe).OnDelete(DeleteBehavior.SetNull);
 
-                entity.HasMany<Ingredient>(r => r.Ingredients).WithOne(i => i.Recipe);
+                //entity.HasMany<Ingredient>(r => r.Ingredients).WithOne(i => i.Recipe);
             });
 
 

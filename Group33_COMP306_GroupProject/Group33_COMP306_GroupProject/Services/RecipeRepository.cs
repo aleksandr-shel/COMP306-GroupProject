@@ -17,7 +17,12 @@ namespace Group33_COMP306_GroupProject.Services
         }
         public async Task<IEnumerable<Recipe>> GetRecipes()
         {
-            return await _context.Recipes.ToListAsync();
+            //foreach (var item in await _context.Recipes.ToListAsync())
+            //{
+            //    item.Ingredients = await _context.Ingredients.Where(i => i.Recipe == item).ToListAsync();
+            //}
+
+            return await _context.Recipes.Include(c => c.Ingredients).ThenInclude(c=>c.Recipe).ToListAsync();
         }
     }
 }

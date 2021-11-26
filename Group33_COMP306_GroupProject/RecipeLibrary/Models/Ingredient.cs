@@ -12,6 +12,6 @@ namespace RecipeLibrary.Models
         public string IngredientAmount { get; set; }
         public int RecipeId { get; set; }
 
-        public virtual Recipe Recipe { get; set; }
+        public Recipe Recipe { get; set; }
     }
 }

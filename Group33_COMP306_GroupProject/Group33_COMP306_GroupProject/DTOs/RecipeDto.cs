@@ -14,7 +14,6 @@ namespace Group33_COMP306_GroupProject.DTOs
         public string ImageIrl { get; set; }
         public string AuthorId { get; set; }
 
-        public virtual ICollection<IngredientDto> Ingredients { get; set; }
-        = new List<IngredientDto>();
+        public ICollection<IngredientDto> Ingredients { get; set; }
     }
 }
