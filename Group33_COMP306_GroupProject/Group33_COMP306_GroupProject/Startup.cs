@@ -38,6 +38,7 @@ namespace Group33_COMP306_GroupProject
 
 
             services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IIngredientRepository, IngredientRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             //var mapperConfig = new MapperConfiguration(mc =>
