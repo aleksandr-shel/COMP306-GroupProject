@@ -23,12 +23,46 @@ namespace Group33_COMP306_GroupProject.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("/list")]
         public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
             var recipes = await _recipeRepository.GetRecipes();
             var results = _mapper.Map<IEnumerable<RecipeDto>>(recipes);
             return Ok(results);
+        }
+
+        [HttpGet("/{id}")]
+        public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipe(int id)
+        {
+            var recipe = await _recipeRepository.GetRecipe(id);
+            var result = _mapper.Map<RecipeDto>(recipe);
+            return Ok(result);
+        }
+
+
+
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<Recipe>>> CreateRecipe(Recipe recipe)
+        {
+            var recipeNew = await _recipeRepository.CreateRecipe(recipe);
+            var result = _mapper.Map<RecipeDto>(recipeNew);
+            return Ok(result);
+        }
+
+        [HttpGet("/delete/{id}")]
+        public async Task<ActionResult<IEnumerable<Recipe>>> DeleteRecipe(int id)
+        {
+            await _recipeRepository.DeleteRecipe(id);
+            return Ok();
+        }
+
+
+        [HttpPost("/update/{id}")]
+        public async Task<ActionResult<IEnumerable<Recipe>>> UpdateRecipe(int id, Recipe recipe)
+        {
+            var recipeUpd = await _recipeRepository.UpdateRecipe(id, recipe);
+            var result = _mapper.Map<RecipeDto>(recipeUpd);
+            return Ok(result);
         }
 
 
