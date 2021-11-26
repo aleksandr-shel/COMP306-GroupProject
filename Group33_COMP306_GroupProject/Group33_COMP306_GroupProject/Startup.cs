@@ -1,4 +1,4 @@
-using Group33_COMP306_GroupProject.Models;
+using Group33_COMP306_GroupProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +32,9 @@ namespace Group33_COMP306_GroupProject
             services.AddDbContext<COMP306_GroupProjectContext>(
                 opt => opt.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=COMP306_GroupProject;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
             services.AddControllers();
+
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Group33_COMP306_GroupProject", Version = "v1" });

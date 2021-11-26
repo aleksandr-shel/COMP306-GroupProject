@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Group33_COMP306_GroupProject.DTOs;
+using Group33_COMP306_GroupProject.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RecipeLibrary.Models;
 using System;
@@ -12,16 +15,22 @@ namespace Group33_COMP306_GroupProject.Controllers
     [ApiController]
     public class RecipeController : ControllerBase
     {
-        private COMP306_GroupProjectContext _context;
-        public RecipeController(COMP306_GroupProjectContext context)
+        private IRecipeRepository _recipeRepository;
+        private readonly IMapper _mapper;
+        public RecipeController(IRecipeRepository recipeRepository, IMapper mapper)
         {
-            _context = context;
+            _recipeRepository = recipeRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
-            return await _context.Recipes.ToListAsync();
+            var recipes = await _recipeRepository.GetRecipes();
+            var results = _mapper.Map<IEnumerable<RecipeDto>>(recipes);
+            return Ok(results);
         }
+
+
     }
 }
