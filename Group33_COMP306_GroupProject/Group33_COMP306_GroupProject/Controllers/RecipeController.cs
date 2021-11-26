@@ -23,7 +23,7 @@ namespace Group33_COMP306_GroupProject.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("/list")]
+        [HttpGet("list")]
         public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipes()
         {
             var recipes = await _recipeRepository.GetRecipes();
@@ -31,7 +31,7 @@ namespace Group33_COMP306_GroupProject.Controllers
             return Ok(results);
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> GetRecipe(int id)
         {
             var recipe = await _recipeRepository.GetRecipe(id);
@@ -49,7 +49,7 @@ namespace Group33_COMP306_GroupProject.Controllers
             return Ok(result);
         }
 
-        [HttpGet("/delete/{id}")]
+        [HttpGet("delete/{id}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> DeleteRecipe(int id)
         {
             await _recipeRepository.DeleteRecipe(id);
@@ -57,7 +57,7 @@ namespace Group33_COMP306_GroupProject.Controllers
         }
 
 
-        [HttpPost("/update/{id}")]
+        [HttpPost("update/{id}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> UpdateRecipe(int id, Recipe recipe)
         {
             var recipeUpd = await _recipeRepository.UpdateRecipe(id, recipe);
