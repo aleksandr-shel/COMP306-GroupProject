@@ -23,7 +23,7 @@ namespace Group33_COMP306_GroupProject.Mappings
                 //});
             CreateMap<Ingredient, IngredientDto>();
 
-
+            CreateMap<IngredientWithoutIdDto, Ingredient>(); // to update/create existing ingredient 
         }
     }
 }

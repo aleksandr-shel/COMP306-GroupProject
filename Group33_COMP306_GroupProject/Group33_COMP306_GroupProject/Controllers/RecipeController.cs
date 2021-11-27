@@ -49,7 +49,7 @@ namespace Group33_COMP306_GroupProject.Controllers
             return Ok(result);
         }
 
-        [HttpGet("delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> DeleteRecipe(int id)
         {
             await _recipeRepository.DeleteRecipe(id);
@@ -57,7 +57,7 @@ namespace Group33_COMP306_GroupProject.Controllers
         }
 
 
-        [HttpPost("update/{id}")]
+        [HttpPut("update/{id}")]
         public async Task<ActionResult<IEnumerable<Recipe>>> UpdateRecipe(int id, Recipe recipe)
         {
             var recipeUpd = await _recipeRepository.UpdateRecipe(id, recipe);
