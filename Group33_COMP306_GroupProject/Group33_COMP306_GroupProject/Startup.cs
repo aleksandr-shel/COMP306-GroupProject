@@ -32,14 +32,14 @@ namespace Group33_COMP306_GroupProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<COMP306_GroupProjectContext>(
-                opt => opt.UseSqlServer(Configuration.GetConnectionString("Connection2RecipesDB")));
+            //services.AddDbContext<COMP306_GroupProjectContext>(
+            //    opt => opt.UseSqlServer(Configuration.GetConnectionString("Connection2RecipesDB")));
 
-            /*var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("Connection2RecipesDB"));
+            var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("Connection2RecipesDB"));
             builder.UserID = Configuration["DbUserName"];
             builder.Password = Configuration["DbPassword"];
             var connection = builder.ConnectionString;
-            services.AddDbContext<COMP306_GroupProjectContext>(options => options.UseSqlServer(connection));*/
+            services.AddDbContext<COMP306_GroupProjectContext>(options => options.UseSqlServer(connection));
 
             services.AddControllers();
 
