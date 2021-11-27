@@ -15,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using RecipeLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,8 +37,15 @@ namespace Group33_COMP306_GroupProject
             //    opt => opt.UseSqlServer(Configuration.GetConnectionString("Connection2RecipesDB")));
 
             var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("Connection2RecipesDB"));
-            builder.UserID = Configuration["DbUserName"];
-            builder.Password = Configuration["DbPassword"];
+
+            var builderAppSettings = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            builder.UserID = builderAppSettings.Build().GetSection("RDSCredentials").GetSection("DbUserName").Value;
+            builder.Password = builderAppSettings.Build().GetSection("RDSCredentials").GetSection("DbPassword").Value;
+
+            //builder.UserID = Configuration["DbUserName"];
+            //builder.Password = Configuration["DbPassword"];
             var connection = builder.ConnectionString;
             services.AddDbContext<COMP306_GroupProjectContext>(options => options.UseSqlServer(connection));
 
