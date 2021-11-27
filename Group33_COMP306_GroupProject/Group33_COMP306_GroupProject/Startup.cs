@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,10 +33,15 @@ namespace Group33_COMP306_GroupProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<COMP306_GroupProjectContext>(
-                opt => opt.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=COMP306_GroupProject;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+                opt => opt.UseSqlServer(Configuration.GetConnectionString("Connection2RecipesDB")));
+
+            /*var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("Connection2RecipesDB"));
+            builder.UserID = Configuration["DbUserName"];
+            builder.Password = Configuration["DbPassword"];
+            var connection = builder.ConnectionString;
+            services.AddDbContext<COMP306_GroupProjectContext>(options => options.UseSqlServer(connection));*/
+
             services.AddControllers();
-
-
 
             services.AddScoped<IRecipeRepository, RecipeRepository>();
             services.AddScoped<IIngredientRepository, IngredientRepository>();
