@@ -25,7 +25,7 @@ namespace RecipeWebApp.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        [HttpPost("Details/{recipeId}/ingredients/AddIngredient")]
+        [HttpPost("{recipeId}/ingredients/AddIngredient")]
         [ValidateAntiForgeryToken]
         public async void AddIngredientForRecipe(Ingredient ingredient, int recipeId)
         {
@@ -46,7 +46,7 @@ namespace RecipeWebApp.Controllers
         [HttpGet]
         public ActionResult Create(int id)
         {
-            return View("IngredientInfo", id);
+            return View("IngredientInfo", new IngredientCreateViewModel() { IngredientEntity = null, RecipeId = id });
         }
     }
 }
