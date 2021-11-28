@@ -39,6 +39,17 @@
                     {
                         <li>
                             @item.IngredientAmount @item.IngredientName
+
+                            <div>
+                                <form asp-action="UpdateIngredientPage" asp-controller="Ingredient">
+                                    <div><input type="hidden" name="recipeId" value="@Model.Id" /></div>
+                                    <div><input type="hidden" name="ingredientId" value="@item.Id" /></div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Edit" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                            </div>
+
                         </li>
                     }
                 }
@@ -52,7 +63,7 @@
         <form asp-action="Create" asp-controller="Ingredient">
             <div><input type="hidden" name="recipeId" value="@Model?.Id" /></div>
             <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-primary" />
+                <input type="submit" value="Add" class="btn btn-primary" />
             </div>
         </form>
     </div>

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,53 @@ namespace RecipeWebApp.Controllers
         public ActionResult Create(int recipeId)
         {
             return View("IngredientInfo", new IngredientCreateViewModel() { IngredientEntity = null, RecipeId = recipeId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(string ingredientName, string ingredientAmount, int recipeId, int ingredientId)
+        {
+            string json;
+            try
+            {   
+                response = await client.GetAsync($"api/Ingredient/{recipeId}/ingredients/{ingredientId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    json = await response.Content.ReadAsStringAsync();
+
+                    Ingredient ingredient = JsonConvert.DeserializeObject<Ingredient>(json);
+
+                    //StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                    ingredient.IngredientName = ingredientName;
+                    ingredient.IngredientAmount = ingredientAmount;
+                    response = await client.PutAsJsonAsync($"api/Ingredient/{recipeId}/ingredients/{ingredientId}", ingredient);
+                }
+                else
+                {
+                    Console.WriteLine("Internal Server error");
+                }
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return RedirectToAction(nameof(Index), nameof(Recipe));
+        }
+
+        public async Task<ActionResult> UpdateIngredientPage(int recipeId, int ingredientId)
+        {
+            Ingredient ingredient = new();
+
+            response = await client.GetAsync($"api/Ingredient/{recipeId}/ingredients/{ingredientId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+
+                ingredient = JsonConvert.DeserializeObject<Ingredient>(json);
+            }
+
+            return View("IngredientUpdatePage", new IngredientCreateViewModel() { IngredientEntity = ingredient, RecipeId = recipeId });
         }
     }
 }
