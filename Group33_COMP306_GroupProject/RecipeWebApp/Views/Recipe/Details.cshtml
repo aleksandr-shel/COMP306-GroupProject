@@ -48,6 +48,14 @@
                                         <input type="submit" value="Edit" class="btn btn-primary" />
                                     </div>
                                 </form>
+
+                                <form asp-action="Delete" asp-controller="Ingredient">
+                                    <div><input type="hidden" name="recipeId" value="@Model.Id" /></div>
+                                    <div><input type="hidden" name="ingredientId" value="@item.Id" /></div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                    </div>
+                                </form>
                             </div>
 
                         </li>

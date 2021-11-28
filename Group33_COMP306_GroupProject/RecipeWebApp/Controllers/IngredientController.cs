@@ -96,5 +96,18 @@ namespace RecipeWebApp.Controllers
 
             return View("IngredientUpdatePage", new IngredientCreateViewModel() { IngredientEntity = ingredient, RecipeId = recipeId });
         }
+
+        public async Task<ActionResult> Delete(int recipeId, int ingredientId)
+        {
+            try
+            {
+                response = await client.DeleteAsync($"api/Ingredient/{recipeId}/ingredients/{ingredientId}");
+            }
+            catch (HttpRequestException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return RedirectToAction(nameof(Index), nameof(Recipe));
+        }
     }
 }
