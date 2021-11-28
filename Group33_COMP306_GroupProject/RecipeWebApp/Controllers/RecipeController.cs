@@ -152,8 +152,15 @@ namespace RecipeWebApp.Controllers
                     AuthorId = recipe.AuthorId
                 };
                 json = JsonConvert.SerializeObject(recipeNew);
-                //response = await client.PostAsync("api/Recipe/update/" + id, content);
-                return RedirectToAction(nameof(Index));
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                response = await client.PutAsync("api/recipe/update/" + id, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction(nameof(Index));
+                }else
+                {
+                    return View();
+                }
             }
             catch
             {
@@ -194,7 +201,7 @@ namespace RecipeWebApp.Controllers
         {
             try
             {
-                response = await client.GetAsync("api/Recipe/delete/" + id);
+                response = await client.DeleteAsync("api/Recipe/delete/" + id);
                 return RedirectToAction(nameof(Index));
             }
             catch
