@@ -54,7 +54,7 @@ namespace Group33_COMP306_GroupProject.Controllers
         // POST api/<controller>
 
         [HttpPost("{recipeId}/ingredients")]
-        public async Task<ActionResult<IngredientDto>> CreatePointOfInterest(int recipeId, [FromBody] IngredientWithoutIdDto ingredient)
+        public async Task<ActionResult<IngredientDto>> CreateIngredient(int recipeId, [FromBody] IngredientWithoutIdDto ingredient)
         {
             if (ingredient == null) return BadRequest();
 
@@ -77,7 +77,7 @@ namespace Group33_COMP306_GroupProject.Controllers
         // PUT api/<controller>/5
 
         [HttpPut("{recipeId}/ingredients/{id}")]
-        public async Task<ActionResult> UpdatePointOfInterest(int recipeId, int id, [FromBody] IngredientWithoutIdDto ingredient)
+        public async Task<ActionResult> UpdateIngredient(int recipeId, int id, [FromBody] IngredientWithoutIdDto ingredient)
         {
             if (ingredient == null) return BadRequest();
 
@@ -101,7 +101,7 @@ namespace Group33_COMP306_GroupProject.Controllers
         // DELETE api/<controller>/5
 
         [HttpDelete("{recipeId}/ingredients/{id}")]
-        public async Task<ActionResult> DeletePointOfInterest(int recipeId, int id)
+        public async Task<ActionResult> DeleteIngredient(int recipeId, int id)
         {
             Ingredient ingredientEntity2Delete = await _ingredientRepository.GetIngredientsForRecipe(recipeId, id);
             

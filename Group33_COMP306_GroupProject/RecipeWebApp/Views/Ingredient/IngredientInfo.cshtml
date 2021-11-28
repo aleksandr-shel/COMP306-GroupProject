@@ -1,0 +1,38 @@
+﻿@model RecipeWebApp.Models.Ingredient
+
+@{
+    ViewData["Title"] = "Add Ingredient";
+}
+
+<h1>Add Ingredient</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddIngredientForRecipe">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IngredientName" class="control-label"></label>
+                <input asp-for="IngredientName" class="form-control" />
+                <span asp-validation-for="IngredientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IngredientAmount" class="control-label"></label>
+                <input asp-for="IngredientAmount" class="form-control" />
+                <span asp-validation-for="IngredientAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecipeId" class="control-label"></label>
+                <textarea asp-for="RecipeId" class="form-control" ></textarea>
+                <span asp-validation-for="RecipeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
