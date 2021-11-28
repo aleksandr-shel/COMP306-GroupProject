@@ -25,6 +25,8 @@ namespace RecipeWebApp.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        [HttpPost("Details/{recipeId}/ingredients/AddIngredient")]
+        [ValidateAntiForgeryToken]
         public async void AddIngredientForRecipe(Ingredient ingredient, int recipeId)
         {
             var json = JsonConvert.SerializeObject(ingredient);
@@ -39,6 +41,12 @@ namespace RecipeWebApp.Controllers
 
             json = await response.Content.ReadAsStringAsync();
             Console.WriteLine("Ingredient has been inserted" + json);
+        }
+
+        [HttpGet]
+        public ActionResult Create(int id)
+        {
+            return View("IngredientInfo", id);
         }
     }
 }
