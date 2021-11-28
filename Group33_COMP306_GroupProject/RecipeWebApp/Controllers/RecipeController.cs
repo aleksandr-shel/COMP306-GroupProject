@@ -53,7 +53,7 @@ namespace RecipeWebApp.Controllers
         // GET: RecipeController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            Recipe recipe = null;
+            Recipe recipe = new Recipe() { Ingredients = new List<Ingredient>() };
             try
             {
                 string json;
