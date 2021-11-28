@@ -9,18 +9,21 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form action="@Model.RecipeId/ingredients/AddIngredient">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IngredientEntity.IngredientName" class="control-label"></label>
-                <input asp-for="IngredientEntity.IngredientName" class="form-control" />
-                <span asp-validation-for="IngredientEntity.IngredientName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IngredientEntity.IngredientAmount" class="control-label"></label>
-                <input asp-for="IngredientEntity.IngredientAmount" class="form-control" />
-                <span asp-validation-for="IngredientEntity.IngredientAmount" class="text-danger"></span>
-            </div>
+        <form asp-action="AddIngredientForRecipe" asp-controller="Ingredient">
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="IngredientEntity.IngredientName" class="control-label"></label>
+            <input asp-for="IngredientEntity.IngredientName" class="form-control" />
+            <span asp-validation-for="IngredientEntity.IngredientName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="IngredientEntity.IngredientAmount" class="control-label"></label>
+            <input asp-for="IngredientEntity.IngredientAmount" class="form-control" />
+            <span asp-validation-for="IngredientEntity.IngredientAmount" class="text-danger"></span>
+        </div>*@
+            <div><input type="text" name="ingredientName"/></div>
+            <div><input type="number" min="1" step="1" name="ingredientAmount"/></div>
+            <div><input type="hidden" name="recipeId" value="@Model.RecipeId" /></div>
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-primary" />
             </div>

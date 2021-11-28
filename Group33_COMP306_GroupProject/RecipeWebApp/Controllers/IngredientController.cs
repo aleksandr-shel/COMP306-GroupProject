@@ -16,6 +16,7 @@ namespace RecipeWebApp.Controllers
     {
         HttpClient client = new HttpClient();
         string uri = "http://group33comp306groupproject-dev.ca-central-1.elasticbeanstalk.com/";
+        //string uri = "https://localhost:5001/";
         HttpResponseMessage response;
 
         public IngredientController()
@@ -25,28 +26,27 @@ namespace RecipeWebApp.Controllers
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        [HttpPost("{recipeId}/ingredients/AddIngredient")]
-        [ValidateAntiForgeryToken]
-        public async void AddIngredientForRecipe(Ingredient ingredient, int recipeId)
+        [HttpPost]
+        public async Task<IActionResult> AddIngredientForRecipe(string ingredientName, string ingredientAmount, int recipeId)
         {
+            Ingredient ingredient = new Ingredient()
+            {
+                IngredientName = ingredientName,
+                IngredientAmount = ingredientAmount
+            };
+
             var json = JsonConvert.SerializeObject(ingredient);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
-            response = await client.PostAsync($"{recipeId}/ingredients", content);
+            response = await client.PostAsync($"api/Ingredient/{recipeId}/ingredients", content);
 
-            response = await client.PostAsJsonAsync($"{recipeId}/ingredients", ingredient);
+            //response = await client.PostAsJsonAsync($"{recipeId}/ingredients", ingredient);
 
-            Console.WriteLine($"status from POST {response.StatusCode}");
-            response.EnsureSuccessStatusCode();
-            Console.WriteLine($"added resource at {response.Headers.Location}");
-
-            json = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("Ingredient has been inserted" + json);
+            return RedirectToAction(nameof(Index), nameof(Recipe));
         }
 
-        [HttpGet]
-        public ActionResult Create(int id)
+        public ActionResult Create(int recipeId)
         {
-            return View("IngredientInfo", new IngredientCreateViewModel() { IngredientEntity = null, RecipeId = id });
+            return View("IngredientInfo", new IngredientCreateViewModel() { IngredientEntity = null, RecipeId = recipeId });
         }
     }
 }

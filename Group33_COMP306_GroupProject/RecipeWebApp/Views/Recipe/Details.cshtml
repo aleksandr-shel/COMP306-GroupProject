@@ -44,6 +44,14 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { Model.Id }) |
+    @*Html.ActionLink("Edit", "Edit", new { Model.Id }) |*@
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="Ingredient">
+            <div><input type="hidden" name="recipeId" value="@Model.Id" /></div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
     <a asp-action="Index">Back to List</a>
 </div>
