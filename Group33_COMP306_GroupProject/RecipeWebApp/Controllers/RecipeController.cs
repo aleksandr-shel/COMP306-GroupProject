@@ -15,7 +15,7 @@ namespace RecipeWebApp.Controllers
     public class RecipeController : Controller
     {
         HttpClient client = new HttpClient();
-        string uri = "https://localhost:5001/";
+        string uri = "http://group33comp306groupproject-dev.ca-central-1.elasticbeanstalk.com/";
         HttpResponseMessage response;
 
         public RecipeController()
