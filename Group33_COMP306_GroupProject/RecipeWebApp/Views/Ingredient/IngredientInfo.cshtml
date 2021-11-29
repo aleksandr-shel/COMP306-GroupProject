@@ -11,7 +11,7 @@
     <div class="col-md-4">
         <form asp-action="AddIngredientForRecipe" asp-controller="Ingredient">
             <div><input type="text" name="ingredientName"/></div>
-            <div><input type="number" name="ingredientAmount"/></div>
+            <div><input type="text" name="ingredientAmount"/></div>
             <div><input type="hidden" name="recipeId" value="@Model.RecipeId" /></div>
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-primary" />
