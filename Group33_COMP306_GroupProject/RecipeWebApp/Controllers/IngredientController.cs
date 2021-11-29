@@ -42,7 +42,7 @@ namespace RecipeWebApp.Controllers
 
             //response = await client.PostAsJsonAsync($"{recipeId}/ingredients", ingredient);
 
-            return RedirectToAction(nameof(Index), nameof(Recipe));
+            return RedirectToAction("Details", nameof(Recipe), new { id = recipeId });
         }
 
         public ActionResult Create(int recipeId)
@@ -79,7 +79,7 @@ namespace RecipeWebApp.Controllers
                 Console.WriteLine(e.Message);
             }
 
-            return RedirectToAction(nameof(Index), nameof(Recipe));
+            return RedirectToAction("Details", nameof(Recipe), new { id = recipeId });
         }
 
         public async Task<ActionResult> UpdateIngredientPage(int recipeId, int ingredientId)
@@ -107,7 +107,7 @@ namespace RecipeWebApp.Controllers
             {
                 Console.WriteLine(e.Message);
             }
-            return RedirectToAction(nameof(Index), nameof(Recipe));
+            return RedirectToAction("Details", nameof(Recipe), new { id = recipeId });
         }
     }
 }
